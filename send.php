@@ -74,7 +74,9 @@ foreach ($lines as $line) {
   $ret = call_user_func_array(array("Segment", $type), array($payload));
   if ($ret) $successful++;
   $total++;
-  if ($total % 100 === 0) Segment::flush();
+  if ($total % 100 === 0 || $type=="alias") Segment::flush();
+  if ($type=="alias") 
+	usleep(500000);
 }
 
 Segment::flush();
